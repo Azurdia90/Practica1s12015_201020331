@@ -62,6 +62,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Iniciar Juego"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBiniciarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jTBresetear">
       <Properties>

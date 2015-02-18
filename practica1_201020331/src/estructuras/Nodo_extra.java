@@ -10,9 +10,14 @@ package estructuras;
 public class Nodo_extra {
     
     private String texto;
-    
+    //apuntadores de la estructura
     private Nodo_extra next;
     private Nodo_extra back;
+    
+    //constructor de la Clase
+    public Nodo_extra(String t){
+        texto = t;
+    }
     
     //metodos get de la clase
     public String getTexto() {

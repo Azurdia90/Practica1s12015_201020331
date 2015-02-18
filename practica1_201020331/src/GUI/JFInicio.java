@@ -7,7 +7,9 @@ import java.awt.BorderLayout;
  * @author Cristian
  */
 public class JFInicio extends javax.swing.JFrame {
-
+    
+    private estructuras.Jugador jugador;
+    
     JPFondo_inicio fondo;
     JFJugador_planta ventana1;
     
@@ -15,7 +17,8 @@ public class JFInicio extends javax.swing.JFrame {
         initComponents();
         fondo = new JPFondo_inicio();
         this.add(fondo, BorderLayout.CENTER);
-        
+        jugador = new estructuras.Jugador();
+        practica1_201020331.Logica_juego.setJugador(jugador);
     }
 
     /**
@@ -38,6 +41,11 @@ public class JFInicio extends javax.swing.JFrame {
         jTBjugador_zombies.setText("Jugador Zombies");
 
         jTBiniciar.setText("Iniciar Juego");
+        jTBiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBiniciarActionPerformed(evt);
+            }
+        });
 
         jTBresetear.setText("Borrar Datos");
 
@@ -79,9 +87,13 @@ public class JFInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBjugador_plantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBjugador_plantasActionPerformed
-         ventana1 = new JFJugador_planta();
+         ventana1 = new JFJugador_planta(jugador);
          ventana1.show();
     }//GEN-LAST:event_jBjugador_plantasActionPerformed
+
+    private void jTBiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBiniciarActionPerformed
+        
+    }//GEN-LAST:event_jTBiniciarActionPerformed
 
  
 

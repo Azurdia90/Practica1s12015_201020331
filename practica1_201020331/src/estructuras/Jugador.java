@@ -10,7 +10,12 @@ public class Jugador {
     
     private Jugador_planta raiz_jugador1;
     private Jugador_zombie raiz_jugador2;
-
+    
+    //constructor de la Clase
+    public Jugador(){
+        raiz_jugador1 = null;
+        raiz_jugador2 = null;
+    }
     //metodos get de la clase
     public Jugador_planta getRaiz_jugador1() {
         return raiz_jugador1;

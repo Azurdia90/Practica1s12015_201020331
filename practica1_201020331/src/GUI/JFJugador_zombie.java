@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
  *
  * @author Cristian
  */
-public class JFJugador_planta extends javax.swing.JFrame {
+public class JFJugador_zombie extends javax.swing.JFrame {
 
     private estructuras.Jugador jugador;
-    private estructuras.Jugador_planta jugador_planta;
+    private estructuras.Jugador_zombie jugador_zombie;
     
-    public JFJugador_planta(estructuras.Jugador jugador) {
+    public JFJugador_zombie(estructuras.Jugador jugador) {
         initComponents();
-        this.jugador = jugador;     
+        this.jugador = jugador;
         jBextra.setVisible(false);
     }
 
@@ -152,7 +152,7 @@ public class JFJugador_planta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addComponent(jBfin)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,22 +169,17 @@ public class JFJugador_planta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinActionPerformed
-        practica1_201020331.Logica_juego.setJugador(jugador);
-        this.dispose();
-    }//GEN-LAST:event_jBfinActionPerformed
-
     private void jBdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdatosActionPerformed
         try{//en caso que no se ingrese un numero en cantidad
-        String nombre = jTFnombre.getText();
-        int cantidad = Integer.parseInt(jTFcantidad.getText());
-        //crear el nodo jugador_planta y se agrega a la raiz jugador
-        jugador_planta = new estructuras.Jugador_planta(nombre, cantidad);
-        jugador.setRaiz_jugador1(jugador_planta);
-        jBextra.setVisible(true);
+            String nombre = jTFnombre.getText();
+            int cantidad = Integer.parseInt(jTFcantidad.getText());
+            //crear el nodo jugador_planta y se agrega a la raiz jugador
+            jugador_zombie = new estructuras.Jugador_zombie(nombre, cantidad);
+            jugador.setRaiz_jugador2(jugador_zombie);
+            jBextra.setVisible(true);
         }catch(Exception e){ //mostrar el mensje en pantalla
             JOptionPane.showMessageDialog(null, "Ingrese un numero en "
-                    + "la casilla cantidad");
+                + "la casilla cantidad");
         }//fin try
     }//GEN-LAST:event_jBdatosActionPerformed
 
@@ -194,12 +189,17 @@ public class JFJugador_planta extends javax.swing.JFrame {
         insertar(texto);
         jTAextra.setText("");
     }//GEN-LAST:event_jBextraActionPerformed
-    
-    /*METODOS DE LA LISTA DEL JUGADOR PLANTA*/
+
+    private void jBfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinActionPerformed
+        practica1_201020331.Logica_juego.setJugador(jugador);
+        this.dispose();
+    }//GEN-LAST:event_jBfinActionPerformed
+
+    /*METODOS DE LA LISTA DEL JUGADOR ZOMBIE*/
     //metodo para determinar si la raiz del jugador planta esta vacia
     public boolean vacio(){
         
-        if(jugador.getRaiz_jugador1().getRaiz() != null){
+        if(jugador.getRaiz_jugador2().getRaiz() != null){
             return false;
         }else{
             return true;
@@ -213,14 +213,13 @@ public class JFJugador_planta extends javax.swing.JFrame {
         
         if(!vacio()){
             nuevo.setBack(jugador.getRaiz_jugador1().getCola());
-            jugador.getRaiz_jugador1().getCola().setNext(nuevo);
-            jugador.getRaiz_jugador1().setCola(nuevo);
+            jugador.getRaiz_jugador2().getCola().setNext(nuevo);
+            jugador.getRaiz_jugador2().setCola(nuevo);
         }else{
-            jugador.getRaiz_jugador1().setRaiz(nuevo);
-            jugador.getRaiz_jugador1().setCola(nuevo);
+            jugador.getRaiz_jugador2().setRaiz(nuevo);
+            jugador.getRaiz_jugador2().setCola(nuevo);
         }
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBdatos;
