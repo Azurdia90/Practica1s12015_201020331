@@ -57,6 +57,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Jugador Zombies"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBjugador_zombiesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jTBiniciar">
       <Properties>

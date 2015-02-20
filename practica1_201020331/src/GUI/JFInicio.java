@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,10 +9,15 @@ import java.awt.BorderLayout;
  */
 public class JFInicio extends javax.swing.JFrame {
     
+    private boolean ban1 = false;
+    private boolean ban2 = false;
+    
     private estructuras.Jugador jugador;
     
     JPFondo_inicio fondo;
     JFJugador_planta ventana1;
+    JFJugador_zombie ventana2;
+    JFCrear_Planta ventana3;
     
     public JFInicio() {
         initComponents();
@@ -39,6 +45,11 @@ public class JFInicio extends javax.swing.JFrame {
         setResizable(false);
 
         jTBjugador_zombies.setText("Jugador Zombies");
+        jTBjugador_zombies.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBjugador_zombiesActionPerformed(evt);
+            }
+        });
 
         jTBiniciar.setText("Iniciar Juego");
         jTBiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,11 +100,25 @@ public class JFInicio extends javax.swing.JFrame {
     private void jBjugador_plantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBjugador_plantasActionPerformed
          ventana1 = new JFJugador_planta(jugador);
          ventana1.show();
+         ban1 = true;
     }//GEN-LAST:event_jBjugador_plantasActionPerformed
 
     private void jTBiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBiniciarActionPerformed
-        
+        if(ban1 == true && ban2 == true){
+        ventana3 = new JFCrear_Planta();
+        ventana3.show();
+        this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingrese un jugador "
+                    + "de cada tipo");
+        }
     }//GEN-LAST:event_jTBiniciarActionPerformed
+
+    private void jTBjugador_zombiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBjugador_zombiesActionPerformed
+        ventana2 = new JFJugador_zombie(jugador);
+        ventana2.show();
+        ban2 = true;
+    }//GEN-LAST:event_jTBjugador_zombiesActionPerformed
 
  
 

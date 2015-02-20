@@ -7,17 +7,41 @@ package estructuras;
  **/
 public class Personaje {
     
+    private int clave;
     private String imagen;
     private String nombre;
     private int ataque;
     private int defensa;
+    private boolean tipo_ataque;
+    //varibales para el manejo en el tablero
     private int pos_x;
     private int pos_y;
-    
+    //apuntadores de la estructura
     private Personaje next;
     private Personaje back;
     
+    //constructor de la clase
+    public Personaje(int c,String i, String n, int a, int d, boolean t){
+        clave = c;
+        imagen = i;
+        nombre = n;
+        ataque= a;
+        defensa = d;
+        tipo_ataque = t;
+        
+        pos_x = 0;
+        pos_y =0;
+        
+        next = null;
+        back = null;
+    }//fin del constructor de la clase
+    
     //metodos get de la clase
+    
+    public int getClave() {
+        return clave;
+    }
+    
     public String getImagen() {
         return imagen;
     }
@@ -33,7 +57,11 @@ public class Personaje {
     public int getDefensa() {
         return defensa;
     }
-
+    
+    public boolean isTipo_ataque() {
+        return tipo_ataque;
+    }
+    
     public int getPos_x() {
         return pos_x;
     }
@@ -51,6 +79,10 @@ public class Personaje {
     }
     
     //metodos set de la clase
+    public void setClave(int clave) {
+        this.clave = clave;
+    }
+    
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
@@ -65,6 +97,10 @@ public class Personaje {
 
     public void setDefensa(int defensa) {
         this.defensa = defensa;
+    }
+    
+     public void setTipo_ataque(boolean tipo_ataque) {
+        this.tipo_ataque = tipo_ataque;
     }
 
     public void setPos_x(int pos_x) {
