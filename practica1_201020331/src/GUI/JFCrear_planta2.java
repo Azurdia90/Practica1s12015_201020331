@@ -1,15 +1,29 @@
 package GUI;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  * @author Cristian
  * CLASE DEL FORM QUE MANEJA LA INSERCCION DE PLANTAS
  */
 public class JFCrear_planta2 extends javax.swing.JFrame {
-
+    //variables de la clase para almacenar plantas
     private estructuras.Raiz_Personaje raiz;
+    private estructuras.Lista_doble lista;
+    //variables del manejo de la ventana
+    private String path;
+    private int contador;
+    private int decre;
+    //constructor de la clase
     public JFCrear_planta2(estructuras.Raiz_Personaje raiz) {
         initComponents();
         this.raiz = raiz;
+        path = "";
+        contador = 1;
+        decre = practica1_201020331.Logica_juego.getJugador().getRaiz_jugador1().getCantidad();
+        jLcontador.setText("Faltan: " + Integer.toString(decre));
     }
 
     /**
@@ -33,6 +47,7 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
         jTFataque = new javax.swing.JTextField();
         jTFdefensa = new javax.swing.JTextField();
         jBexaminar = new javax.swing.JButton();
+        jLcontador = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +79,11 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
         });
 
         jBexaminar.setText("Examinar....");
+        jBexaminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBexaminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +111,9 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
                             .addComponent(jTFataque, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFdefensa, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addComponent(jBagregar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBagregar)
+                            .addComponent(jLcontador, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,21 +128,26 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTFnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTFataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBagregar)))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTFdefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jCBataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTFataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTFdefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBagregar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jCBataque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLcontador, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,10 +158,64 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFataqueActionPerformed
 
     private void jBagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBagregarActionPerformed
-        
+       insertar_lista();
     }//GEN-LAST:event_jBagregarActionPerformed
 
+    private void jBexaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBexaminarActionPerformed
+        //creamos el cuadro dialogo para abrir archivos
+        JFileChooser abrir = new JFileChooser();
+        int r = abrir.showOpenDialog(null);
+        if(r == JFileChooser.APPROVE_OPTION){
+            File archivo = abrir.getSelectedFile();
+            path = archivo.getPath();
+        }
+        jTFimagen.setText(path);
+    }//GEN-LAST:event_jBexaminarActionPerformed
+
+    public void insertar_lista(){
+        try{
+                lista = new estructuras.Lista_doble(raiz);
+                String i = jTFimagen.getText();
+                String n = jTFnombre.getText();
+                int a = Integer.parseInt(jTFataque.getText());
+                int d = Integer.parseInt(jTFdefensa.getText());
+                boolean t = tipo_ataque();//averiguamos que opcion se elijio
+                lista.insertar(raiz,contador, i, n, a, d, t);
+                actualizar();//actualizar el frame
+            }catch(Exception e){//en caso de ocurrir una expcion en los numeros
+                JOptionPane.showMessageDialog(null, "Ingrese un numero en "
+                        + "la casilla de ataque y/o defensa");
+            }//fin del try
+    }//fin del metodo insertar en la lista
     
+    public boolean tipo_ataque(){
+        boolean retornar;
+        if(jCBataque.getItemCount() ==0){
+            retornar = false;  //false si eligio tiro
+        }else{//de lo contrario 
+            retornar = true;//true para ataque cuerpo a cuerpo
+        }//fin del if del JCombobox
+        return retornar;
+    }//fin del metodo tipo ataque
+    
+    public void actualizar(){
+        contador = contador + 1;
+        decre = decre -1;
+        jLcontador.setText("Faltan: " + Integer.toString(decre));
+        if(decre > 0){
+            limpiar();
+        }else{
+            practica1_201020331.Logica_juego.setPlanta(raiz);
+            this.dispose();
+        }
+    }//fin del metodo actualizar el frame
+    
+    public void limpiar(){
+        jTFimagen.setText("");
+        jTFnombre.setText("");
+        jTFataque.setText("");
+        jTFdefensa.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBagregar;
@@ -145,6 +226,7 @@ public class JFCrear_planta2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLcontador;
     private javax.swing.JTextField jTFataque;
     private javax.swing.JTextField jTFdefensa;
     private javax.swing.JTextField jTFimagen;

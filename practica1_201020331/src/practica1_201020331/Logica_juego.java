@@ -13,7 +13,20 @@ public class Logica_juego {
     private static estructuras.Jugador jugador;
     private static estructuras.Raiz_Personaje planta;
     private static estructuras.Raiz_Personaje zombie;
+    
+    //metodos get de la clase
+    public static Jugador getJugador() {
+        return jugador;
+    }
 
+    public static Raiz_Personaje getPlanta() {
+        return planta;
+    }
+
+    public static Raiz_Personaje getZombie() {
+        return zombie;
+    }
+    //metodos set de la clase
     public static void setJugador(Jugador jugador) {
         Logica_juego.jugador = jugador;
     }
@@ -22,7 +35,8 @@ public class Logica_juego {
         Logica_juego.planta = planta;
     }
 
-    
-    
+    public static void setZombie(Raiz_Personaje zombie) {
+        Logica_juego.zombie = zombie;
+    }
 
-}
+}//fin de la clase controladora

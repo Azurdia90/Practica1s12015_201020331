@@ -1,5 +1,7 @@
 package estructuras;
 
+import static java.lang.System.console;
+
 /**
  * @author Cristian
  * CLASE QUE MANEJARA LA LISTA DE LOS PERSONAJES UTILIZADOS 
@@ -88,4 +90,17 @@ public class Lista_doble {
         //se retorna el valor del resultado
         return bandera;
     }//fin metodo eliminar
+    
+    public void imprimir(){
+        estructuras.Personaje aux = this.raiz.getCima();
+        
+        if(!vacio(this.raiz)){
+            System.out.println(aux.getClave());
+            aux = aux.getNext();
+            
+        }else{
+            System.out.println("la estructura 2 esa vaica");
+        }
+        
+    }
 }
