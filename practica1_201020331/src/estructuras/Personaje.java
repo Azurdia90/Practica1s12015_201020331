@@ -5,7 +5,7 @@ package estructuras;
  * CLASE PADRE QUE DETERMINA CARACTERISTICAS DE LOS
  * NODOS DE LOS PERSONAJES DE LA PRACTICA
  **/
-public class Personaje {
+public class Personaje implements Cloneable{
     
     private int clave;
     private String imagen;
@@ -36,8 +36,15 @@ public class Personaje {
         back = null;
     }//fin del constructor de la clase
     
-    //metodos get de la clase
+    //metodo que permite crear copias de los personajes
+    public Personaje clone(){
+        
+        Personaje clon = new Personaje(this.clave, this.imagen, this.nombre, 
+                this.ataque, this.defensa, this.tipo_ataque);
+        return clon;
+    }//fin del metodo clon de personajes
     
+    //metodos get de la clase
     public int getClave() {
         return clave;
     }
