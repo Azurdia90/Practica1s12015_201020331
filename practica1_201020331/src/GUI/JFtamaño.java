@@ -92,8 +92,8 @@ public class JFtamaño extends javax.swing.JFrame {
             ventana1.show();
             this.dispose();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Ingrese un numeros"
-                    + "unicamente");           
+            JOptionPane.showMessageDialog(null, "Ingrese un numeros "
+                    + e);           
         }
     }//GEN-LAST:event_jBaceptarActionPerformed
 

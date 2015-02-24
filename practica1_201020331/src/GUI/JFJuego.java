@@ -1,7 +1,12 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * @author Cristian
@@ -18,8 +23,9 @@ public class JFJuego extends javax.swing.JFrame implements Runnable{
     private final int tamaño_label = 50;
     private JLabel[][] matriz_planta;
     private JLabel[][] matriz_zombie;
+    private JButton[][] matriz_juego;
     
-    private final int tiempo = 60;
+    private final int tiempo = 80;
     Thread reloj;
     
     public JFJuego() {
@@ -40,26 +46,32 @@ public class JFJuego extends javax.swing.JFrame implements Runnable{
 
     public void setear_matrices(){
         matriz_planta = new JLabel[largo1][2];
-        matriz_planta = new JLabel[largo2][2];
+        matriz_zombie = new JLabel[largo2][2];
     }
     
     public void run(){
-        while(true){
-            crear_matrices();
-            actualizar_matrices();
-            
+        try{
+            while(true){
+                crear_matrices();
+                actualizar_matrices();
+                reloj.sleep(tiempo);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "A ocurrido el siguiente error:  "
+                        + e);
         }
     }//fin del metodo del hilo
     
     public void crear_matrices(){
-            
+        encabezados_plantas();
+        encabezados_zombies();
     }
     
     public void encabezados_plantas(){
         for(int x=0; x<2; x++){
             JLabel encabezado = new JLabel();
             encabezado.setOpaque(true);
-            encabezado.setBounds( x*100 , 0 ,tamaño_label, tamaño_label);
+            encabezado.setBounds( x*100 , 15 ,tamaño_label*2, tamaño_label);
             encabezado.setVisible(true);
             encabezado.setBackground(Color.red);
             switch (x){
@@ -78,7 +90,7 @@ public class JFJuego extends javax.swing.JFrame implements Runnable{
             for(int x=0; x<2; x++){
             JLabel encabezado = new JLabel();
             encabezado.setOpaque(true);
-            encabezado.setBounds( x*100 , 0 ,tamaño_label, tamaño_label);
+            encabezado.setBounds( x*100 , 15,tamaño_label*2, tamaño_label);
             encabezado.setVisible(true);
             encabezado.setBackground(Color.red);
             switch (x){
@@ -93,9 +105,87 @@ public class JFJuego extends javax.swing.JFrame implements Runnable{
         }
     }
     public void actualizar_matrices(){
-        
+        verificar_juego();
     }
     
+    public void verificar_juego(){
+        if(raiz_plantas.getCima() == null && raiz_zombies.getCima() != null){
+            JOptionPane.showMessageDialog(null, "HAN GANADO LAS PLANTA ");
+        }else if(raiz_plantas.getCima() != null && raiz_zombies.getCima() == null){
+            JOptionPane.showMessageDialog(null, "HAN GANADO LOS ZOMBIES ");
+        }else{
+            crear_cola_plantas();
+            crear_pila_zombies();
+        }
+    }
+    
+    public void crear_cola_plantas(){
+        estructuras.Personaje aux = raiz_plantas.getCima();
+        int y = 0;
+        while(aux!=null){
+            if(y < 5){
+                for(int x=0; x<2; x++){
+                    crear_cola_plantas(aux, x, y);
+                }
+            }
+            y = y +1;
+            aux= aux.getNext();
+        }
+    }
+    
+    public void crear_cola_plantas(estructuras.Personaje aux, int x, int y){
+        matriz_planta[y][x] = new JLabel();
+        matriz_planta[y][x].setOpaque(true);
+        matriz_planta[y][x].setBounds(x*100,(y+1)*(65),(tamaño_label*2), tamaño_label);
+        matriz_planta[y][x].setVisible(true);
+        matriz_planta[y][x].setBackground(Color.white);
+        switch(x){
+            case 0:
+                ImageIcon foto = new ImageIcon(aux.getImagen());
+                Icon personaje = new ImageIcon(foto.getImage().getScaledInstance(tamaño_label, tamaño_label,Image.SCALE_DEFAULT));
+                matriz_planta[y][x].setIcon(personaje);
+                break;
+            case 1:
+                matriz_planta[y][x].setText(Integer.toString(aux.getClave()));
+                break;
+        }
+        jPplantas.add(matriz_planta[y][x]);
+        this.repaint();
+    }
+    
+    public void crear_pila_zombies(){
+        estructuras.Personaje aux = raiz_zombies.getCima();
+        int y = 0;
+        while(aux!=null){
+            if(y < 5){
+                for(int x=0; x<2; x++){
+                    crear_pila_zombies(aux, x, y);
+                }
+            }
+            y = y +1;
+            aux= aux.getNext();
+        }
+    }
+    
+    public void crear_pila_zombies(estructuras.Personaje aux, int x, int y){
+        matriz_zombie[y][x] = new JLabel();
+        matriz_zombie[y][x].setOpaque(true);
+        matriz_zombie[y][x].setBounds(x*100,(y+1)*(65),(tamaño_label*2), tamaño_label);
+        matriz_zombie[y][x].setVisible(true);
+        matriz_zombie[y][x].setBackground(Color.white);
+        switch(x){
+            case 0:
+                ImageIcon foto = new ImageIcon(aux.getImagen());
+                Icon personaje = new ImageIcon(foto.getImage().getScaledInstance(tamaño_label, tamaño_label,Image.SCALE_DEFAULT));
+                matriz_zombie[y][x].setIcon(personaje);
+                break;
+            case 1:
+                matriz_zombie[y][x].setText(Integer.toString(aux.getClave()));
+                break;
+        }
+        jPzombies.add(matriz_zombie[y][x]);
+        this.repaint();
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

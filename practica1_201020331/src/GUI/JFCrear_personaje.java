@@ -193,11 +193,13 @@ public class JFCrear_personaje extends javax.swing.JFrame implements Runnable{
         if(tipo == false){
             practica1_201020331.Logica_juego.setPlanta(planta);
             encolar();
+            practica1_201020331.Logica_juego.setPlanta_juego(raiz_cola);
             ventana2 = new JFCrear_personaje(raiz_jugador, true);
             ventana2.show();
         }else{
             practica1_201020331.Logica_juego.setZombie(zombie);
             enpilar();
+            practica1_201020331.Logica_juego.setZombie_juego(raiz_pila);
             ventana3 = new JFtamaño();
             ventana3.show();
         }

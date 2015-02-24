@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,7 @@ public class JFInicio extends javax.swing.JFrame {
     
     public JFInicio() {
         initComponents();
+        crear_carpeta();
         fondo = new JPFondo_inicio();
         this.add(fondo, BorderLayout.CENTER);
         jugador = new estructuras.Raiz_jugador();
@@ -137,7 +139,12 @@ public class JFInicio extends javax.swing.JFrame {
         jBPlantas.setEnabled(true);
     }//GEN-LAST:event_jBresetearActionPerformed
 
- 
+    public void crear_carpeta(){
+        File carpeta = new File("C:\\Plantas_vs_Zombies");
+            if(!carpeta.exists()){
+               carpeta.mkdir();      
+            }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBPlantas;

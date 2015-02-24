@@ -5,6 +5,7 @@
 package practica1_201020331;
 
 import GUI.JFInicio;
+import java.io.File;
 
 /**
  * @author Cristian
@@ -19,6 +20,7 @@ public class Juego {
         // TODO code application logic here
         JFInicio ventanita = new JFInicio();
         ventanita.show();
+        
     }
-    
+  
 }
