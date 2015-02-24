@@ -8,22 +8,22 @@ import javax.swing.JOptionPane;
  * @author Cristian
  */
 public class JFInicio extends javax.swing.JFrame {
-    
+    //banderas que manejan el ingreso de personajes
     private boolean ban1 = false;
     private boolean ban2 = false;
-    
-    private estructuras.Jugador jugador;
-    
+    //raiz de la primer figura
+    private estructuras.Raiz_jugador jugador;
+    //objetos que se manejan junto a la ventana
     JPFondo_inicio fondo;
-    JFJugador_planta ventana1;
-    JFJugador_zombie ventana2;
-    JFCrear_Planta ventana3;
+    JFJugador ventana1; //personaje jugador planta
+    JFJugador ventana2; //personaje jugador zombie
+    JFCrear_personaje ventana3;
     
     public JFInicio() {
         initComponents();
         fondo = new JPFondo_inicio();
         this.add(fondo, BorderLayout.CENTER);
-        jugador = new estructuras.Jugador();
+        jugador = new estructuras.Raiz_jugador();
         practica1_201020331.Logica_juego.setJugador(jugador);
     }
 
@@ -36,34 +36,40 @@ public class JFInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTBjugador_zombies = new javax.swing.JToggleButton();
-        jTBiniciar = new javax.swing.JToggleButton();
-        jTBresetear = new javax.swing.JToggleButton();
-        jBjugador_plantas = new javax.swing.JButton();
+        jBPlantas = new javax.swing.JButton();
+        jBZombies = new javax.swing.JButton();
+        jBiniciar = new javax.swing.JButton();
+        jBresetear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PLANTS VS. ZOMBIES");
         setResizable(false);
 
-        jTBjugador_zombies.setText("Jugador Zombies");
-        jTBjugador_zombies.addActionListener(new java.awt.event.ActionListener() {
+        jBPlantas.setText("Jugador Plantas");
+        jBPlantas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTBjugador_zombiesActionPerformed(evt);
+                jBPlantasActionPerformed(evt);
             }
         });
 
-        jTBiniciar.setText("Iniciar Juego");
-        jTBiniciar.addActionListener(new java.awt.event.ActionListener() {
+        jBZombies.setText("Jugador Zombies");
+        jBZombies.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTBiniciarActionPerformed(evt);
+                jBZombiesActionPerformed(evt);
             }
         });
 
-        jTBresetear.setText("Borrar Datos");
-
-        jBjugador_plantas.setText("Jugador Plantas");
-        jBjugador_plantas.addActionListener(new java.awt.event.ActionListener() {
+        jBiniciar.setText("Iniciar Juego");
+        jBiniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBjugador_plantasActionPerformed(evt);
+                jBiniciarActionPerformed(evt);
+            }
+        });
+
+        jBresetear.setText("Borrar Datos");
+        jBresetear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBresetearActionPerformed(evt);
             }
         });
 
@@ -71,61 +77,72 @@ public class JFInicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(179, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTBjugador_zombies, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTBiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTBresetear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBjugador_plantas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                    .addComponent(jBZombies, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBPlantas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBresetear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
-                .addComponent(jBjugador_plantas)
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addComponent(jBPlantas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTBjugador_zombies)
+                .addComponent(jBZombies)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTBiniciar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTBresetear)
-                .addGap(134, 134, 134))
+                .addComponent(jBiniciar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBresetear)
+                .addGap(151, 151, 151))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBjugador_plantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBjugador_plantasActionPerformed
-         ventana1 = new JFJugador_planta(jugador);
+    private void jBPlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPlantasActionPerformed
+         ventana1 = new JFJugador(jugador, false);
          ventana1.show();
          ban1 = true;
-    }//GEN-LAST:event_jBjugador_plantasActionPerformed
+         jBPlantas.setEnabled(false);
+    }//GEN-LAST:event_jBPlantasActionPerformed
 
-    private void jTBiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBiniciarActionPerformed
+    private void jBZombiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBZombiesActionPerformed
+        ventana2 = new JFJugador(jugador, true);
+        ventana2.show();
+        ban2 = true;
+        jBZombies.setEnabled(false);
+    }//GEN-LAST:event_jBZombiesActionPerformed
+
+    private void jBiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBiniciarActionPerformed
         if(ban1 == true && ban2 == true){
-        ventana3 = new JFCrear_Planta();
+        practica1_201020331.Logica_juego.setJugador(jugador);
+        ventana3 = new JFCrear_personaje(jugador, false);
         ventana3.show();
         this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Ingrese un jugador "
                     + "de cada tipo");
         }
-    }//GEN-LAST:event_jTBiniciarActionPerformed
+    }//GEN-LAST:event_jBiniciarActionPerformed
 
-    private void jTBjugador_zombiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBjugador_zombiesActionPerformed
-        ventana2 = new JFJugador_zombie(jugador);
-        ventana2.show();
-        ban2 = true;
-    }//GEN-LAST:event_jTBjugador_zombiesActionPerformed
+    private void jBresetearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBresetearActionPerformed
+        jugador.setRaiz_jugador(null);
+        jugador.setCola_jugador(null);
+        practica1_201020331.Logica_juego.setJugador(jugador);
+        jBPlantas.setEnabled(true);
+        jBPlantas.setEnabled(true);
+    }//GEN-LAST:event_jBresetearActionPerformed
 
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBjugador_plantas;
-    private javax.swing.JToggleButton jTBiniciar;
-    private javax.swing.JToggleButton jTBjugador_zombies;
-    private javax.swing.JToggleButton jTBresetear;
+    private javax.swing.JButton jBPlantas;
+    private javax.swing.JButton jBZombies;
+    private javax.swing.JButton jBiniciar;
+    private javax.swing.JButton jBresetear;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,15 +35,11 @@ public class Personaje implements Cloneable{
         next = null;
         back = null;
     }//fin del constructor de la clase
-    
-    //metodo que permite crear copias de los personajes
-    public Personaje clone(){
-        
-        Personaje clon = new Personaje(this.clave, this.imagen, this.nombre, 
-                this.ataque, this.defensa, this.tipo_ataque);
+    public Personaje clon(){
+        Personaje clon = new Personaje(this.clave, this.imagen, this.nombre,this.ataque,
+        this.defensa, this.tipo_ataque);
         return clon;
-    }//fin del metodo clon de personajes
-    
+    }
     //metodos get de la clase
     public int getClave() {
         return clave;

@@ -14,7 +14,7 @@ public class Cola {
     
     public boolean vacio(estructuras.Raiz_cola raiz){
         boolean retornar;
-        if(raiz != null){
+        if(raiz.getCima() != null){
             retornar = false;
         }else{//si esta vacio
             retornar = true;

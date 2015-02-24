@@ -9,7 +9,7 @@ public class Pila {
     
     private estructuras.Raiz_pila raiz;
     
-    public void Pila(estructuras.Raiz_pila raiz){
+    public Pila(estructuras.Raiz_pila raiz){
         this.raiz = raiz;
     }
     

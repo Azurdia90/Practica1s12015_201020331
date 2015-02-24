@@ -1,26 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI;
 
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author Cristian
+ * CLASE QUE PERMITE MANEJAR NUEVOS JUGADORES 
+ * AGREGARLES TAMBIEN EL CAMPO EXTRA DE TEXTO
  */
-public class JFJugador_zombie extends javax.swing.JFrame {
+public class JFJugador extends javax.swing.JFrame {
+    //raices de las estructuras que se estan utilizando
+    private estructuras.Raiz_jugador raiz_jugador;
+    private estructuras.Jugador nuevo_jugador;
 
-    private estructuras.Jugador jugador;
-    private estructuras.Jugador_zombie jugador_zombie;
+    //variable que declara que tipo dde jugador usar
+    private boolean tipo;//false es planta y true zombie
     
-    public JFJugador_zombie(estructuras.Jugador jugador) {
+    public JFJugador(estructuras.Raiz_jugador jugador, boolean t) {
         initComponents();
-        this.jugador = jugador;
-        jBextra.setVisible(false);
+        this.raiz_jugador = jugador; 
+        tipo = t;
+        titulo();
+        jBextra.setEnabled(false);
+    }
+    
+    public void titulo(){
+        if(tipo == false){
+            this.setTitle("CREAR JUGADOR PLANTA");
+        }else{
+            this.setTitle("CREAR JUGADOR ZOMBIE");
+        }
     }
 
     /**
@@ -152,7 +160,7 @@ public class JFJugador_zombie extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addComponent(jBfin)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,55 +177,70 @@ public class JFJugador_zombie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBfinActionPerformed
+
     private void jBdatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdatosActionPerformed
         try{//en caso que no se ingrese un numero en cantidad
             String nombre = jTFnombre.getText();
             int cantidad = Integer.parseInt(jTFcantidad.getText());
-            //crear el nodo jugador_planta y se agrega a la raiz jugador
-            jugador_zombie = new estructuras.Jugador_zombie(nombre, cantidad);
-            jugador.setRaiz_jugador2(jugador_zombie);
-            jBextra.setVisible(true);
+            insertar_jugador(nombre, cantidad);
+            jBdatos.setEnabled(false);
+            jTFnombre.setEnabled(false);
+            jTFcantidad.setEnabled(false);
         }catch(Exception e){ //mostrar el mensje en pantalla
             JOptionPane.showMessageDialog(null, "Ingrese un numero en "
-                + "la casilla cantidad");
+                    + "la casilla cantidad");
         }//fin try
     }//GEN-LAST:event_jBdatosActionPerformed
 
     private void jBextraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBextraActionPerformed
         jBdatos.setVisible(false);
         String texto = jTAextra.getText();
-        insertar(texto);
+        estructuras.Nodo_extra nuevo = new estructuras.Nodo_extra(texto);
+        insertar_extra(nuevo);
         jTAextra.setText("");
     }//GEN-LAST:event_jBextraActionPerformed
-
-    private void jBfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfinActionPerformed
-        practica1_201020331.Logica_juego.setJugador(jugador);
-        this.dispose();
-    }//GEN-LAST:event_jBfinActionPerformed
-
-    /*METODOS DE LA LISTA DEL JUGADOR ZOMBIE*/
+    
+    /*METODOS DE LA LISTA DEL JUGADOR */
     //metodo para determinar si la raiz del jugador planta esta vacia
-    public boolean vacio(){
-        
-        if(jugador.getRaiz_jugador2().getRaiz() != null){
+    public boolean vacio_jugador(estructuras.Raiz_jugador raiz){
+        if(raiz.getRaiz_jugador() != null){
             return false;
         }else{
             return true;
         }
-    
     }
     //insertar al final de la lista todos los valores extra
-    public void insertar(String t){
-        
-        estructuras.Nodo_extra nuevo = new estructuras.Nodo_extra(t);
-        
-        if(!vacio()){
-            nuevo.setBack(jugador.getRaiz_jugador1().getCola());
-            jugador.getRaiz_jugador2().getCola().setNext(nuevo);
-            jugador.getRaiz_jugador2().setCola(nuevo);
+    public void insertar_jugador(String t, int c){
+        nuevo_jugador = new estructuras.Jugador(t, c, tipo);
+        if(!vacio_jugador(raiz_jugador)){
+            nuevo_jugador.setBack(raiz_jugador.getCola_jugador());
+            raiz_jugador.getCola_jugador().setNext(nuevo_jugador);
+            raiz_jugador.setCola_jugador(nuevo_jugador);
         }else{
-            jugador.getRaiz_jugador2().setRaiz(nuevo);
-            jugador.getRaiz_jugador2().setCola(nuevo);
+            raiz_jugador.setRaiz_jugador(nuevo_jugador);
+            raiz_jugador.setCola_jugador(nuevo_jugador);
+        }
+    }
+    
+    public boolean vacio_extra(estructuras.Jugador raiz){
+        if(raiz != null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public void insertar_extra(estructuras.Nodo_extra nuevo){
+        if(!vacio_extra(nuevo_jugador)){
+            nuevo.setBack(nuevo_jugador.getCola());
+            nuevo_jugador.getCola().setNext(nuevo);
+            nuevo_jugador.setCola(nuevo);
+        }else{
+            nuevo_jugador.setRaiz(nuevo);
+            nuevo_jugador.setCola(nuevo);
         }
     }
 

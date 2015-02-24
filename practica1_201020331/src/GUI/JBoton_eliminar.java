@@ -7,7 +7,7 @@ import javax.swing.JButton;
  * @author Cristian
  * BOTON QUE PERMITIRA ELEMINAR A LOS PERSONAJES DE LA LISTA
  */
-public class JBoton_eliminar extends JButton implements ActionListener{
+public class JBoton_eliminar extends JButton {
     
     private int clave;
     private estructuras.Raiz_Personaje raiz;
@@ -19,8 +19,6 @@ public class JBoton_eliminar extends JButton implements ActionListener{
         lista = new estructuras.Lista_doble(raiz);
     }
     
-    public void ActionPerformed(ActionEvent e){
-        lista.eliminar(raiz, clave);
-    }
+
 
 }

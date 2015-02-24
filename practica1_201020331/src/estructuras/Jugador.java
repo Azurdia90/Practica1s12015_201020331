@@ -2,36 +2,90 @@ package estructuras;
 
 /**
  * @author Cristian
- * CLASE QUE SERIA EL NODO RAIZ DE LA GRAFICA NO. 1
- * CONTIENE NODOS DEL TIPO JUGADOR_PLANTA Y ZOMBIE
+ * CLASE QUE MANEJA EL NODO DEL JUGADOR 
+ * ALMACENA LAS CARACTERISTICAS Y SUS ENLACES A LAS RAICES
  * 
  */
+
 public class Jugador {
     
-    private Jugador_planta raiz_jugador1;
-    private Jugador_zombie raiz_jugador2;
+    private String nombre;
+    private int cantidad;
+    private boolean tipo;
+    //apuntador hacia otro jugador
+    private Jugador  next;
+    private Jugador back;
+    //raiz de la lista de campos extra
+    private Nodo_extra raiz;
+    private Nodo_extra cola;
     
-    //constructor de la Clase
-    public Jugador(){
-        raiz_jugador1 = null;
-        raiz_jugador2 = null;
+    //contructor de la clase
+    public Jugador(String n, int c, boolean t){
+        nombre = n;
+        cantidad = c;
+        tipo = t;
+        next = null;
+        back = null;
+        raiz = null;
+        cola = null;
     }
+
     //metodos get de la clase
-    public Jugador_planta getRaiz_jugador1() {
-        return raiz_jugador1;
+    public String getNombre() {
+        return nombre;
     }
 
-    public Jugador_zombie getRaiz_jugador2() {
-        return raiz_jugador2;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    //metodos set de la clase
-    public void setRaiz_jugador1(Jugador_planta raiz_jugador1) {
-        this.raiz_jugador1 = raiz_jugador1;
+    public boolean isTipo() {
+        return tipo;
     }
 
-    public void setRaiz_jugador2(Jugador_zombie raiz_jugador2) {
-        this.raiz_jugador2 = raiz_jugador2;
+    public Jugador getNext() {
+        return next;
+    }
+
+    public Jugador getBack() {
+        return back;
+    }
+
+    public Nodo_extra getRaiz() {
+        return raiz;
+    }
+
+    public Nodo_extra getCola() {
+        return cola;
     }
     
-}//fin de la clase
+    //metodos set de la clase
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setTipo(boolean tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNext(Jugador next) {
+        this.next = next;
+    }
+
+    public void setBack(Jugador back) {
+        this.back = back;
+    }
+
+    public void setRaiz(Nodo_extra raiz) {
+        this.raiz = raiz;
+    }
+
+    public void setCola(Nodo_extra cola) {
+        this.cola = cola;
+    }
+
+}//fin public class Jugador
